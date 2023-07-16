@@ -2,63 +2,52 @@
 declare(strict_types=1);
 
 class Display {
-    private $name;
-    private $surname;
-    private $age;
-    private $gpa;
+    private $type;
+    private $vendor;
+    private $model;
+    private $resolution;
+    private $inUse;
     
-    /**
-     * Student constructor.
-     * 
-     * @param string $name
-     * @param string $surname
-     * @param int $age
-     * @param float $gpa
-     */
-
-    public function __construct(string $name, string $surname, int $age)
-    {
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->age = $age;
-        $this->gpa = 0;
+    //  Display constructor
+    //  @param string $type
+    //  @param string $vendor
+    //  @param string $model
+    //  @param string $resolution
+    public function __construct(string $type, string $vendor, string $model, string $resolution){
+        $this->type = $type;
+        $this->vendor = $vendor;
+        $this->model = $model;
+        $this->resolution = $resolution;
+        $this->inUse = false;
     }
 
-    /**
-     * @param float $gpa
-     */
-    public function setGPA(float $gpa): void
-    {
-        if ($gpa > 0) {
-            $this->gpa = $gpa;
+    // @param bool $inUse
+    public function useDisplay() {
+        if ($this->inUse == false) {
+            $this->inUse = true;
+        } else {
+            $this->inUse = false;
         }
     }
 
-    /**
-     * @return float
-     */
-    public function getGPA(): float
-    {
-        return $this->gpa;
+    // @return data
+    public function statusDisplay() {
+        if ($this->inUse == false) {
+            return $this->vendor . ' ' . $this->model . ' не занят';
+        } else {
+            return $this->vendor . ' ' . $this->model . ' используется';
+        }
     }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
 
 }
 
-$student = new Display('Аркадий', 'Иванов', 20);
+$display = new Display('TV', 'LG', '55FHD', '1920x1028');
+echo $display->useDisplay();
+echo $display->statusDisplay();
+echo PHP_EOL;
 
-echo $student->getName();
-echo $student->getGPA();
-echo $student->setGPA(4.7);
-echo $student->getGPA();
-
+$tablet = new Display('tablet', 'Apple', 'iPad', '1280x1024');
+echo $tablet->statusDisplay();
+echo PHP_EOL;
 
 ?>

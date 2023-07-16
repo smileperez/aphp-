@@ -9,7 +9,7 @@ class Vehicle {
     private $color;
     private $mileage;
     
-    //  Student constructor
+    //  Vehicle constructor
     //  @param string $type
     //  @param string $vendor
     //  @param string $model
