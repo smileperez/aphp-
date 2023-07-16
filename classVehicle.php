@@ -1,64 +1,81 @@
 <?php
 declare(strict_types=1);
 
-class Student {
-    private $name;
-    private $surname;
-    private $age;
-    private $gpa;
+class Vehicle {
+    private $type;
+    private $vendor;
+    private $model;
+    private $release;
+    private $color;
+    private $mileage;
     
-    /**
-     * Student constructor.
-     * 
-     * @param string $name
-     * @param string $surname
-     * @param int $age
-     * @param float $gpa
-     */
-
-    public function __construct(string $name, string $surname, int $age)
-    {
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->age = $age;
-        $this->gpa = 0;
+    //  Student constructor
+    //  @param string $type
+    //  @param string $vendor
+    //  @param string $model
+    //  @param int $release
+    //  @param string $color
+    //  @param int $mileage
+    public function __construct(string $type, string $vendor, string $model, int $release, string $color) {
+        $this->type = $type;
+        $this->vendor = $vendor;
+        $this->model = $model;
+        $this->release = $release;
+        $this->color = $color;
+        $this->mileage = 0;
     }
 
-    /**
-     * @param float $gpa
-     */
-    public function setGPA(float $gpa): void
-    {
-        if ($gpa > 0) {
-            $this->gpa = $gpa;
+    // @param int $mileage
+    public function setMileage(int $mileage): void {
+        if ($mileage > 0) {
+            $this->mileage = $mileage;
         }
     }
 
-    /**
-     * @return float
-     */
-    public function getGPA(): float
-    {
-        return $this->gpa;
+    // @return data
+    private function getPassport() {
+        return [
+            $this->type,
+            $this->vendor,
+            $this->model,
+            $this->release,
+            $this->color,
+            $this->mileage
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    // @echo data
+    public function printPassport() {
+        
+        $type;
+        $vendor;
+        $model;
+        $release;
+        $color;
+        $mileage;
 
+        [$type,  $vendor, $model, $release, $color, $mileage] = self::getPassport();
+
+        echo 
+            'Тип ТС: ' . $type . PHP_EOL . 
+            'Производитель ТС: ' . $vendor . PHP_EOL . 
+            'Модель ТС: ' . $model . PHP_EOL . 
+            'Год производства ТС: ' . $release . PHP_EOL . 
+            'Цвет ТС: ' . $color . PHP_EOL . 
+            'Пробег ТС: ' . $mileage . PHP_EOL;
+    }
 
 }
 
-$student = new Student('Аркадий', 'Иванов', 20);
+$car_exeed = new Vehicle('Авто', 'Exeed', 'TXL', 2021, 'Black');
+echo $car_exeed->setMileage(22560);
+echo $car_exeed->printPassport();
+echo PHP_EOL;
 
-echo $student->getName();
-echo $student->getGPA();
-echo $student->setGPA(4.7);
-echo $student->getGPA();
+$car_ford = new Vehicle('Авто', 'Ford', 'Focus', 2018, 'Gray');
+echo $car_ford->setMileage(78670);
+echo $car_ford->printPassport();
+echo PHP_EOL;
 
 
 ?>
